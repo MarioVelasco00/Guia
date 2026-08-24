@@ -115,3 +115,40 @@ sudo poweroff
 3. Cambia **Conectado a:** por **Adaptador Puente**.
 4. En **Nombre**, elige tu tarjeta **Wi-Fi**.
 5. Dale a **Aceptar**.
+
+
+-------
+
+```text
+sudo nano /etc/keepalived/keepalived.conf
+```
+
+```text
+vrrp_script check_nginx {
+    script "/etc/keepalived/check_nginx.sh"
+    interval 2
+    weight 20
+}
+
+vrrp_instance VI_1 {
+    state BACKUP
+    interface enp0s3
+    virtual_router_id 77
+    priority 100
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass secret123
+    }
+    virtual_ipaddress {
+        10.240.226.200
+    }
+    track_script {
+        check_nginx
+    }
+}
+
+```text
+sudo systemctl restart keepalived
+```
+```
