@@ -147,8 +147,10 @@ vrrp_instance VI_1 {
         check_nginx
     }
 }
+```
 
+NEW
 ```text
 sudo systemctl restart keepalived
 ```
-```
+
