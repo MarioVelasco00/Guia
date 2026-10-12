@@ -149,8 +149,12 @@ vrrp_instance VI_1 {
 }
 ```
 
-NEW
+
+4.11111111111----------------
 ```text
-sudo systemctl restart keepalived
+& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-Apps" keyboardputstring "sudo bash -c 'cat << ""EOF"" > /etc/netplan/50-cloud-init.yaml`nnetwork:`n  version: 2`n  ethernets:`n    enp0s3:`n      dhcp4: true`nEOF`nsudo netplan apply && ip a show enp0s3'`n"
 ```
 
+```text
+& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-DB clonar" keyboardputstring "sudo bash -c 'cat << ""EOF"" > /etc/netplan/50-cloud-init.yaml`nnetwork:`n  version: 2`n  ethernets:`n    enp0s3:`n      dhcp4: true`nEOF`nsudo netplan apply && ip a show enp0s3'`n"
+```
