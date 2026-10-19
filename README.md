@@ -167,9 +167,9 @@ vrrp_instance VI_1 {
 19/10
 
 ```text
-& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-Apps1" keyboardputstring "sudo bash -c 'echo -e ""network:\n  version: 2\n  ethernets:\n    enp0s3:\n      dhcp4: true"" > /etc/netplan/50-cloud-init.yaml && netplan apply'`n"
+& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-Apps1" keyboardputstring "echo bmV0d29yazoKICB2ZXJzaW9uOiAyCiAgZXRoZXJuZXRzOgogICAgZW5wMHMzOgogICAgICBkaGNwNDogdHJ1ZQo= | base64 -d | sudo tee /etc/netplan/50-cloud-init.yaml && sudo netplan apply`n"
 ```
 
 ```text
-& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-Apps2" keyboardputstring "sudo bash -c 'echo -e ""network:\n  version: 2\n  ethernets:\n    enp0s3:\n      dhcp4: true"" > /etc/netplan/50-cloud-init.yaml && netplan apply'`n"
+& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-Apps2" keyboardputstring "echo bmV0d29yazoKICB2ZXJzaW9uOiAyCiAgZXRoZXJuZXRzOgogICAgZW5wMHMzOgogICAgICBkaGNwNDogdHJ1ZQo= | base64 -d | sudo tee /etc/netplan/50-cloud-init.yaml && sudo netplan apply`n"
 ```
