@@ -173,3 +173,28 @@ vrrp_instance VI_1 {
 ```text
 & "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" controlvm "Lab4.1-Apps2" keyboardputstring "echo bmV0d29yazoKICB2ZXJzaW9uOiAyCiAgZXRoZXJuZXRzOgogICAgZW5wMHMzOgogICAgICBkaGNwNDogdHJ1ZQo= | base64 -d | sudo tee /etc/netplan/50-cloud-init.yaml && sudo netplan apply`n"
 ```
+
+```text
+cat << 'EOF' > ~/apps/app1_3001/.env
+PORT=3001
+DB_HOST=172.20.10.7
+DB_USER=usr_movies
+DB_PASSWORD=secret
+DB_NAME=db_movies
+EOF
+sed -i '/ssl: {/,/}/d' ~/apps/app1_3001/app.js
+cd ~/apps/app1_3001 && pm2 restart all && pm2 save
+```
+
+
+```text
+cat << 'EOF' > ~/apps/app2_3002/.env
+PORT=3002
+DB_HOST=172.20.10.7
+DB_USER=usr_movies
+DB_PASSWORD=secret
+DB_NAME=db_movies
+EOF
+sed -i '/ssl: {/,/}/d' ~/apps/app2_3002/app.js
+cd ~/apps/app2_3002 && pm2 restart all && pm2 save
+```
