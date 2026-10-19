@@ -198,3 +198,8 @@ EOF
 sed -i '/ssl: {/,/}/d' ~/apps/app2_3002/app.js
 cd ~/apps/app2_3002 && pm2 restart all && pm2 save
 ```
+
+
+```text
+cd ~/apps/app2_3002 && pm2 start app.js --name app2_3002 && pm2 save --force
+```
