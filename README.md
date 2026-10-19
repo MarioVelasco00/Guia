@@ -203,3 +203,7 @@ cd ~/apps/app2_3002 && pm2 restart all && pm2 save
 ```text
 cd ~/apps/app2_3002 && pm2 start app.js --name app2_3002 && pm2 save --force
 ```
+
+```text
+cd ~/apps/app1_3001 && pm2 start app.js --name app1_3001 && pm2 save --force
+```
