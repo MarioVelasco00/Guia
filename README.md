@@ -207,3 +207,107 @@ cd ~/apps/app2_3002 && pm2 start app.js --name app2_3002 && pm2 save --force
 ```text
 cd ~/apps/app1_3001 && pm2 start app.js --name app1_3001 && pm2 save --force
 ```
+
+---
+
+Aquí tienes cada comando en su bloque listo para copiar y pegar, con su descripción corta abajo para tu informe:
+
+---
+
+### 📸 CAPTURA 1: Netplan y Dirección IP
+```text
+sudo cat /etc/netplan/50-cloud-init.yaml && ip a show enp0s8
+```
+✍️ **Texto para tu informe:**  
+*"Configuración de interfaz interna enp0s8 con IP estática 192.168.10.2/29 y DNS local en Netplan."*
+
+---
+
+### 📸 CAPTURA 2: Validación de Zonas en BIND9
+```text
+sudo named-checkzone andescloud.local /etc/bind/db.andescloud.local && sudo named-checkzone 10.168.192.in-addr.arpa /etc/bind/db.192.168.10
+```
+✍️ **Texto para tu informe:**  
+*"Validación de sintaxis correcta en los archivos de zona directa e inversa de BIND9."*
+
+---
+
+### 📸 CAPTURA 3: Resolución DNS Directa e Inversa
+```text
+dig @127.0.0.1 www.andescloud.local +short && dig @127.0.0.1 app.andescloud.local && dig -x 192.168.10.2 @127.0.0.1 +short
+```
+✍️ **Texto para tu informe:**  
+*"Pruebas de resolución DNS directa (A y CNAME) e inversa (PTR) para el dominio andescloud.local."*
+
+---
+
+### 📸 CAPTURA 4: Estado de Procesos en PM2
+```text
+pm2 status
+```
+✍️ **Texto para tu informe:**  
+*"Estado de las dos instancias de aplicación Node.js activas y gestionadas por PM2 en modo producción."*
+
+---
+
+### 📸 CAPTURA 5: Configuración de Nginx y Test de Sintaxis
+```text
+cat /etc/nginx/sites-available/andescloud.local && sudo nginx -t
+```
+✍️ **Texto para tu informe:**  
+*"Configuración de Nginx como Proxy Inverso con algoritmo Least Connection y validación de sintaxis."*
+
+---
+
+### 📸 CAPTURA 6: Alternancia de Peticiones con curl
+```text
+for i in {1..4}; do curl -s http://www.andescloud.local | grep -E "Puerto|AndesCloud"; echo "---"; done
+```
+✍️ **Texto para tu informe:**  
+*"Distribución equitativa de peticiones HTTP entre las instancias en los puertos 3001 y 3002 a través del balanceador."*
+
+---
+
+### 📸 CAPTURA 7: Prueba de Carga con Apache Bench
+```text
+ab -n 100 -c 10 http://www.andescloud.local/
+```
+✍️ **Texto para tu informe:**  
+*"Prueba de estrés con Apache Bench demostrando alta disponibilidad y 0% de fallos bajo carga concurrente."*
+
+---
+
+### 📸 CAPTURA 8: Subinterfaces VLAN Activas
+```text
+ip -br a
+```
+✍️ **Texto para tu informe:**  
+*"Segmentación lógica departamental mediante subinterfaces VLAN (10, 20 y 30) activas sobre enp0s8."*
+
+---
+
+### 📸 CAPTURA 9: Reglas Numeradas de UFW
+```text
+sudo ufw status numbered
+```
+✍️ **Texto para tu informe:**  
+*"Lista numerada de reglas de firewall en UFW y control de tráfico de enrutamiento Inter-VLAN."*
+
+---
+
+### 📸 CAPTURA 10: Estado de Prometheus y Node Exporter
+```text
+sudo systemctl status prometheus prometheus-node-exporter --no-pager
+```
+✍️ **Texto para tu informe:**  
+*"Servicios de Prometheus y Node Exporter activos y en ejecución en el servidor."*
+
+---
+
+### 📸 CAPTURA 11: Endpoints Activos (UP) en Prometheus
+```text
+curl -s http://localhost:9090/api/v1/targets | grep -o '"health":"[^"]*"'
+```
+✍️ **Texto para tu informe:**  
+*"Comprobación de la API de Prometheus evidenciando que los endpoints de monitoreo se encuentran en estado UP."*  
+*(Si tomaste la captura desde el navegador en `http://localhost:9090/targets`, puedes poner: "Panel de Targets en Prometheus evidenciando que los endpoints de monitoreo local y de VLANs se encuentran en estado UP").*
